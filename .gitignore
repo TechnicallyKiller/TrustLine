@@ -43,3 +43,6 @@ tael-protocol/
 
 # Local wallet key files (demo holding wallets, treasury, etc.) — never commit.
 *.local
+
+# SCF submission working draft — internal, not for the public repo
+scf45-submission.md
