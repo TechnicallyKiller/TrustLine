@@ -122,9 +122,11 @@ function uniforms(t: number): Uniforms {
       : t < 1.675 ? 1.075 - 0.075 * seg(t, 1.645, 1.675)    // one-frame overshoot seats
       : 1,                                                   // dead still
     pulse: t >= 1.74 && t < 2.2 ? -0.08 + 1.43 * ePulse(seg(t, 1.74, 2.18)) : -10,
-    apert: t < 2.2 ? 0 : 0.004 + 0.75 * eApert(seg(t, 2.2, 2.62)),
-    blow: 1 + 1.8 * Math.exp(-(((t - 2.3) / 0.14) ** 2)),
-    alpha: t < 2.5 ? 1 : 1 - eOut(seg(t, 2.5, 2.78)),
+    // The wordmark holds on black from 2.20 to 2.95; the aperture opens only
+    // after it, so the word never sits over the live page and needs no scrim.
+    apert: t < 2.95 ? 0 : 0.004 + 0.75 * eApert(seg(t, 2.95, 3.5)),
+    blow: 1 + 1.8 * Math.exp(-(((t - 3.05) / 0.14) ** 2)),
+    alpha: t < 3.2 ? 1 : 1 - eOut(seg(t, 3.2, 3.56)),
   };
 }
 
@@ -143,7 +145,7 @@ export interface FianzaColdOpenProps {
   onDone?: () => void;
 }
 
-const END = 4.55; // 2.8 open + wordmark beat
+const END = 3.62; // filament → lock → wordmark on black → aperture opens
 
 export default function FianzaColdOpen({
   timeScale = 1,
@@ -185,14 +187,6 @@ export default function FianzaColdOpen({
     const cv = document.createElement('canvas');
     cv.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;';
     el.appendChild(cv);
-    /* The aperture opens onto the live page at 2.19s, and the landing hero's
-       left half is bg-bone — the same #F4F1E9 as the wordmark. Without its own
-       ground the word is invisible over that half. This soft radial scrim rides
-       the same curve as the word, so legibility never depends on what is behind. */
-    const scrim = document.createElement('div');
-    scrim.style.cssText = 'position:absolute;inset:0;opacity:0;pointer-events:none;background:radial-gradient(ellipse 78% 46% at 50% 50%,rgba(6,9,8,0.94) 0%,rgba(6,9,8,0.82) 42%,rgba(6,9,8,0.45) 68%,rgba(6,9,8,0) 100%);';
-    el.appendChild(scrim);
-
     const word = document.createElement('div');
     word.textContent = 'FIANZA';
     word.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:0;color:#F4F1E9;font-family:var(--font-display),"Space Grotesk",system-ui,sans-serif;font-weight:600;font-size:clamp(40px,6vw,84px);letter-spacing:0.34em;text-indent:0.34em;white-space:nowrap;text-shadow:0 0 14px rgba(255,176,32,0.75),0 0 46px rgba(255,176,32,0.45),0 0 110px rgba(255,176,32,0.24),0 0 200px rgba(255,176,32,0.12);';
@@ -239,8 +233,8 @@ export default function FianzaColdOpen({
     /* Any input cuts straight to the open — never trap anyone. */
     const skip = () => {
       const t = (performance.now() - t0) / 1000 / ts;
-      if (t < 2.2) t0 = performance.now() - 2.2 * 1000 * ts;
-      else if (t > 2.4) t0 = performance.now() - END * 1000 * ts; // second input ends the wordmark
+      if (t < 2.95) t0 = performance.now() - 2.95 * 1000 * ts;   // jump to the open
+      else t0 = performance.now() - END * 1000 * ts;              // second input ends it
     };
     const onVis = () => {
       if (document.hidden) {
@@ -256,14 +250,13 @@ export default function FianzaColdOpen({
       prevNow = now;
       const t = (now - t0) / 1000 / ts;
       if (t >= END) { finish(); return; }
-      if (t >= 2.19) el.style.background = 'transparent';
+      if (t >= 2.94) el.style.background = 'transparent';
       // wordmark beat: fade in with glow, hold, gone
-      const wIn = eOut(seg(t, 2.58, 3.05)), wOut = 1 - eOut(seg(t, 4.12, 4.55));
-      const wa = wIn * wOut;
-      word.style.opacity = wa.toFixed(3);
-      scrim.style.opacity = wa.toFixed(3);
-      word.style.transform = `translate(-50%,-50%) scale(${(1.035 - 0.035 * eOut(seg(t, 2.58, 3.7))).toFixed(4)})`;
-      if (t >= 2.8) { cv.style.display = 'none'; raf = requestAnimationFrame(loop); return; }
+      /* In on black at 2.20, holds, then dissolves as the aperture opens. */
+      const wIn = eOut(seg(t, 2.20, 2.62)), wOut = 1 - eOut(seg(t, 2.98, 3.34));
+      word.style.opacity = (wIn * wOut).toFixed(3);
+      word.style.transform = `translate(-50%,-50%) scale(${(1.03 - 0.03 * eOut(seg(t, 2.20, 3.1))).toFixed(4)})`;
+      if (t >= 3.56) { cv.style.display = 'none'; raf = requestAnimationFrame(loop); return; }
       const u = uniforms(t);
       const vel = Math.min(0.02, Math.abs(u.zoom - prevZoom) / Math.max(dt, 0.001) * 0.02);
       prevZoom = u.zoom;
@@ -302,7 +295,6 @@ export default function FianzaColdOpen({
       document.removeEventListener('visibilitychange', onVis);
       window.removeEventListener('resize', size);
       if (cv.parentNode) cv.parentNode.removeChild(cv);
-      if (scrim.parentNode) scrim.parentNode.removeChild(scrim);
       if (word.parentNode) word.parentNode.removeChild(word);
     };
     window.addEventListener('pointerdown', skip, { capture: true, passive: true });
