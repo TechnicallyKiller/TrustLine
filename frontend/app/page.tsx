@@ -10,6 +10,7 @@
 
 import TLNav from "@/components/tl/TLNav";
 import ScrollProgress from "@/components/tl/ScrollProgress";
+import FianzaColdOpen from "@/components/tl/FianzaColdOpen";
 import SplitHero from "@/components/landing/SplitHero";
 import BrandBand from "@/components/landing/BrandBand";
 import Ticker from "@/components/landing/Ticker";
@@ -21,6 +22,10 @@ import JoinWaitlist from "@/components/landing/JoinWaitlist";
 export default function Home() {
   return (
     <div className="tl-select relative min-h-screen bg-obsidian text-bone">
+      {/* Cold-open runs on the landing route only — this is the first-impression
+          surface. The app pages (/borrower, /lender, /portfolio) are tools people
+          return to, and should never gate them behind a 4.5s film. */}
+      <FianzaColdOpen replay="always" />
       <ScrollProgress />
       <TLNav />
 

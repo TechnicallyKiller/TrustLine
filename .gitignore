@@ -71,3 +71,6 @@ contracts/_*
 fianza-*-transactions.csv
 trustline-ui/
 frontend/Fianza Brand Band (standalone).html
+
+# generated cold-open source project (component lives in frontend/components/tl/)
+fianza-cold-open/

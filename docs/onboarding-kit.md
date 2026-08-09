@@ -77,7 +77,7 @@ reasoning.
 
 > **Status:** the faucet endpoint is built and live-tested, but the faucet
 > wallet itself needs a human to send it some real testnet USDC before it can
-> drip (see HANDOFF.md). If `/faucet` 404s or returns "not funded yet", that
+> drip. If `/faucet` 404s or returns "not funded yet", that
 > step hasn't happened yet — ask in the Fianza community for a manual
 > testnet USDC transfer in the meantime.
 

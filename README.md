@@ -163,7 +163,7 @@ docs/        full documentation — see docs/README.md
 ## Run it locally
 
 ```bash
-# contracts (native WSL/Linux toolchain — see PROJECT_LOG.md)
+# contracts (native Linux toolchain)
 cd contracts && stellar contract build && cargo test
 
 # backend underwriting API (:8787)
@@ -175,7 +175,6 @@ cd frontend && npm i && npm run dev
 
 The dashboards connect a Stellar wallet (Freighter) to the deployed contracts.
 Full architecture, addresses, and the demo runbook are in
-[`PROJECT_LOG.md`](PROJECT_LOG.md).
 
 ## Roadmap and honest status
 
@@ -188,8 +187,7 @@ small amounts, one agent, and scores published manually, since there is no live
 mainnet underwriting engine yet. What is still missing is scale and a real
 adversary: the underwriter remains a single trusted signer (v1, with a documented
 decentralization path), and external adoption is early — one third-party
-integration (Nebula's MCP server) and a handful of agents. Named openly, not
-hidden — see also [`PROJECT_LOG.md`](PROJECT_LOG.md).
+integration (Nebula's MCP server) and a handful of agents. Named openly, not hidden.
 
 ## License
 
