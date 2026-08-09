@@ -151,23 +151,33 @@ export default function FianzaColdOpen({
   replay = 'session',
   onDone,
 }: FianzaColdOpenProps) {
-  const [play, setPlay] = useState<boolean>(() => {
-    if (typeof window === 'undefined') return false;
-    try {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
-      if (replay === 'session' && sessionStorage.getItem(KEY)) return false;
-      if (typeof replay === 'number') {
-        const last = Number(localStorage.getItem(KEY) || 0);
-        if (Date.now() - last < replay * 60_000) return false;
-      }
-    } catch { /* storage denied — play it */ }
-    return true;
-  });
+  /*
+   * Rendered on the server as well as the client. If this returned null during
+   * SSR the browser would paint the landing page first and only cover it once
+   * React hydrated — a visible flash of content before the shot begins. The
+   * shade below is therefore in the initial HTML, opaque from the first paint,
+   * and only ever removed from here.
+   */
+  const [play, setPlay] = useState(true);
   const host = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!play || !host.current) return;
+    if (!host.current) return;
     const el = host.current;
+
+    /* Decide on the client, where storage and media queries actually exist.
+       Anything that says "skip" tears the shade down on the first frame. */
+    let skipIt = false;
+    try {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) skipIt = true;
+      else if (replay === 'session' && sessionStorage.getItem(KEY)) skipIt = true;
+      else if (typeof replay === 'number') {
+        const last = Number(localStorage.getItem(KEY) || 0);
+        if (Date.now() - last < replay * 60_000) skipIt = true;
+      }
+    } catch { /* storage denied — play it */ }
+    if (skipIt) { setPlay(false); onDone?.(); return; }
+
     try {
       if (replay === 'session') sessionStorage.setItem(KEY, '1');
       else if (typeof replay === 'number') localStorage.setItem(KEY, String(Date.now()));
@@ -175,9 +185,17 @@ export default function FianzaColdOpen({
     const cv = document.createElement('canvas');
     cv.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;';
     el.appendChild(cv);
+    /* The aperture opens onto the live page at 2.19s, and the landing hero's
+       left half is bg-bone — the same #F4F1E9 as the wordmark. Without its own
+       ground the word is invisible over that half. This soft radial scrim rides
+       the same curve as the word, so legibility never depends on what is behind. */
+    const scrim = document.createElement('div');
+    scrim.style.cssText = 'position:absolute;inset:0;opacity:0;pointer-events:none;background:radial-gradient(ellipse 78% 46% at 50% 50%,rgba(6,9,8,0.94) 0%,rgba(6,9,8,0.82) 42%,rgba(6,9,8,0.45) 68%,rgba(6,9,8,0) 100%);';
+    el.appendChild(scrim);
+
     const word = document.createElement('div');
     word.textContent = 'FIANZA';
-    word.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:0;color:#F4F1E9;font-family:var(--font-display),"Space Grotesk",system-ui,sans-serif;font-weight:600;font-size:clamp(40px,6vw,84px);letter-spacing:0.34em;text-indent:0.34em;white-space:nowrap;text-shadow:0 0 18px rgba(255,176,32,0.55),0 0 70px rgba(255,176,32,0.3),0 0 140px rgba(255,176,32,0.18);';
+    word.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:0;color:#F4F1E9;font-family:var(--font-display),"Space Grotesk",system-ui,sans-serif;font-weight:600;font-size:clamp(40px,6vw,84px);letter-spacing:0.34em;text-indent:0.34em;white-space:nowrap;text-shadow:0 0 14px rgba(255,176,32,0.75),0 0 46px rgba(255,176,32,0.45),0 0 110px rgba(255,176,32,0.24),0 0 200px rgba(255,176,32,0.12);';
     el.appendChild(word);
     const gl = cv.getContext('webgl', { alpha: true, premultipliedAlpha: true, antialias: false, depth: false, stencil: false });
     const ts = timeScale > 0 ? timeScale : 1;
@@ -240,9 +258,11 @@ export default function FianzaColdOpen({
       if (t >= END) { finish(); return; }
       if (t >= 2.19) el.style.background = 'transparent';
       // wordmark beat: fade in with glow, hold, gone
-      const wIn = eOut(seg(t, 2.75, 3.3)), wOut = 1 - eOut(seg(t, 3.95, 4.5));
-      word.style.opacity = (wIn * wOut).toFixed(3);
-      word.style.transform = `translate(-50%,-50%) scale(${(1.035 - 0.035 * eOut(seg(t, 2.75, 3.8))).toFixed(4)})`;
+      const wIn = eOut(seg(t, 2.58, 3.05)), wOut = 1 - eOut(seg(t, 4.12, 4.55));
+      const wa = wIn * wOut;
+      word.style.opacity = wa.toFixed(3);
+      scrim.style.opacity = wa.toFixed(3);
+      word.style.transform = `translate(-50%,-50%) scale(${(1.035 - 0.035 * eOut(seg(t, 2.58, 3.7))).toFixed(4)})`;
       if (t >= 2.8) { cv.style.display = 'none'; raf = requestAnimationFrame(loop); return; }
       const u = uniforms(t);
       const vel = Math.min(0.02, Math.abs(u.zoom - prevZoom) / Math.max(dt, 0.001) * 0.02);
@@ -282,6 +302,8 @@ export default function FianzaColdOpen({
       document.removeEventListener('visibilitychange', onVis);
       window.removeEventListener('resize', size);
       if (cv.parentNode) cv.parentNode.removeChild(cv);
+      if (scrim.parentNode) scrim.parentNode.removeChild(scrim);
+      if (word.parentNode) word.parentNode.removeChild(word);
     };
     window.addEventListener('pointerdown', skip, { capture: true, passive: true });
     window.addEventListener('keydown', skip, { capture: true, passive: true });
@@ -297,10 +319,16 @@ export default function FianzaColdOpen({
 
   if (!play) return null;
   return (
-    <div
-      ref={host}
-      aria-hidden
-      style={{ position: 'fixed', inset: 0, zIndex: 2147483000, pointerEvents: 'none', background: '#060908' }}
-    />
+    <>
+      {/* Hides the shade for reduced-motion users without waiting for JS, so
+          they never see a black frame at all. */}
+      <style>{'@media(prefers-reduced-motion:reduce){#fianza-cold-open{display:none!important}}'}</style>
+      <div
+        id="fianza-cold-open"
+        ref={host}
+        aria-hidden
+        style={{ position: 'fixed', inset: 0, zIndex: 2147483000, pointerEvents: 'none', background: '#060908' }}
+      />
+    </>
   );
 }
