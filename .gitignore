@@ -46,3 +46,28 @@ tael-protocol/
 
 # SCF submission working draft — internal, not for the public repo
 scf45-submission.md
+
+# --- internal working docs: kept locally, not published ---
+HANDOFF.md
+PROJECT_LOG.md
+teal.md
+TAEL_*.md
+*_PROMPT.md
+FIANZA_*.md
+interest.md
+messge.md
+post.md
+*.dc.html
+
+# personal machine config / superseded skill
+.claude/settings.local.json
+.claude/skills/trustline-agent-sdk/
+
+# one-off scratch scripts and deploy id dumps
+backend/_*
+contracts/_*
+
+# submission artifacts + stray brand assets + old UI spike
+fianza-*-transactions.csv
+trustline-ui/
+frontend/Fianza Brand Band (standalone).html
