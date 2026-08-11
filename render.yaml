@@ -62,7 +62,7 @@ services:
       - key: GEMINI_API_KEY
         sync: false
       - key: TRUSTLINE_API
-        value: https://trustline-rpxt.onrender.com
+        value: https://fianza-3ecj.onrender.com
       - key: ANALYST_PRICE_USDC
         value: "0.3"
       # Keep-alive, hosted as a protected endpoint on THIS free web service
@@ -102,6 +102,6 @@ services:
       - key: GEMINI_API_KEY
         sync: false
       - key: TRUSTLINE_API
-        value: https://trustline-rpxt.onrender.com
+        value: https://fianza-3ecj.onrender.com
       - key: REVIEWER_PRICE_USDC
         value: "0.3"

@@ -70,7 +70,7 @@ Python ≥ 3.10, `stellar-sdk` (13–15.x) and `requests` (installed automatical
 import { FianzaAgent } from "@fianza/agent-sdk";
 
 const tl = new FianzaAgent(secret, {
-  apiBaseUrl: "https://trustline-rpxt.onrender.com", // the Fianza backend
+  apiBaseUrl: "https://fianza-3ecj.onrender.com", // the Fianza backend
   // rpcUrl, networkPassphrase,                       // default: testnet
   // contracts: { registry, creditLine, vault },      // else auto-resolved from /config
 });
@@ -82,7 +82,7 @@ from fianza import FianzaAgent
 
 tl = FianzaAgent(
     secret,                                              # the agent's S... secret
-    api_base_url="https://trustline-rpxt.onrender.com",  # the Fianza backend
+    api_base_url="https://fianza-3ecj.onrender.com",  # the Fianza backend
     # rpc_url=..., network_passphrase=...,               # default: testnet
     # contracts={"registry","creditLine","vault"},       # else auto-resolved from /config
 )

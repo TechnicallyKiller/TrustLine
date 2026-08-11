@@ -16,7 +16,7 @@ const CAPABILITY_URL = process.env.TAEL_DEMO_URL || "http://localhost:3099/c/dem
 const PRICE_USDC = Number(process.env.TAEL_DEMO_PRICE_USDC || 0.05);
 
 const tl = new TrustLineAgent(process.env.DEMO_AGENT_SECRET || process.env.DATACO_WALLET_SECRET, {
-  apiBaseUrl: process.env.TRUSTLINE_API || "https://trustline-rpxt.onrender.com",
+  apiBaseUrl: process.env.TRUSTLINE_API || "https://fianza-3ecj.onrender.com",
 });
 
 console.log(`[tael-demo] agent ${tl.publicKey()} calling Tael-shaped capability...`);

@@ -63,7 +63,7 @@ issuer can mint testnet USDC, and there's no public faucet for it anywhere.
 Fianza runs its own drip for exactly this reason:
 
 ```bash
-curl -X POST https://trustline-rpxt.onrender.com/faucet \
+curl -X POST https://fianza-3ecj.onrender.com/faucet \
   -H "content-type: application/json" \
   -d '{"address":"<your-agent-public-key>"}'
 ```

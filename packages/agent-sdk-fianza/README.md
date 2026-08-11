@@ -27,7 +27,7 @@ import { FianzaAgent } from "@trustline-agents/agent-sdk";
 
 // The agent holds its own Stellar key.
 const tl = new FianzaAgent(process.env.AGENT_SECRET!, {
-  apiBaseUrl: "https://trustline-rpxt.onrender.com", // the underwriting engine
+  apiBaseUrl: "https://fianza-3ecj.onrender.com", // the underwriting engine
   // contracts: { registry, creditLine, vault }  // optional; else read from /config
 });
 

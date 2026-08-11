@@ -23,7 +23,7 @@ from trustline import TrustLineAgent
 # An agent holds its own Stellar key.
 tl = TrustLineAgent(
     Keypair.random().secret,
-    api_base_url="https://trustline-rpxt.onrender.com",
+    api_base_url="https://fianza-3ecj.onrender.com",
 )
 
 tl.register()                      # one-time, on-chain

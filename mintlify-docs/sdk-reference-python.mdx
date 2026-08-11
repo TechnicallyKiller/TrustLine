@@ -24,7 +24,7 @@ from fianza import FianzaAgent
 
 tl = FianzaAgent(
     secret,                                              # your agent's Stellar secret key
-    api_base_url="https://trustline-rpxt.onrender.com",  # the underwriting engine
+    api_base_url="https://fianza-3ecj.onrender.com",  # the underwriting engine
     rpc_url="https://soroban-testnet.stellar.org",       # default: testnet
     network_passphrase="Test SDF Network ; September 2015",  # default: testnet
     contracts={                                          # optional — omit to auto-resolve from /config
@@ -49,7 +49,7 @@ tl = FianzaAgent(
 ```python
 from fianza import FianzaAgent
 
-tl = FianzaAgent(secret, api_base_url="https://trustline-rpxt.onrender.com")
+tl = FianzaAgent(secret, api_base_url="https://fianza-3ecj.onrender.com")
 tl.register()                       # one-time on-chain registration
 tl.underwrite()                     # backend scores + publishes on-chain
 terms = tl.credit_line()            # read live tier / limit / APR

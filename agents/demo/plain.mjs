@@ -19,7 +19,7 @@ const NETWORK = "stellar:testnet";
 
 const PRICE_USDC = Number(process.env.ANALYST_PRICE_USDC || 0.3);
 const tl = new TrustLineAgent(process.env.DEMO_AGENT_SECRET, {
-  apiBaseUrl: process.env.TRUSTLINE_API || "https://trustline-rpxt.onrender.com",
+  apiBaseUrl: process.env.TRUSTLINE_API || "https://fianza-3ecj.onrender.com",
 });
 
 console.log(`[demo-agent] requesting research on "${asset}"...`);

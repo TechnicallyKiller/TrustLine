@@ -5,7 +5,7 @@ Fianza (Stellar), settled in USDC.
 
     from fianza import FianzaAgent
 
-    tl = FianzaAgent(secret, api_base_url="https://trustline-rpxt.onrender.com")
+    tl = FianzaAgent(secret, api_base_url="https://fianza-3ecj.onrender.com")
     tl.register()
     tl.underwrite()
     terms = tl.credit_line()

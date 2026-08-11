@@ -12,14 +12,14 @@
 //   node examples/quickstart.mjs
 //
 // Optional env:
-//   TRUSTLINE_API   defaults to https://trustline-rpxt.onrender.com
+//   TRUSTLINE_API   defaults to https://fianza-3ecj.onrender.com
 //   AGENT_SECRET    reuse an existing funded Stellar secret instead of
 //                   generating + funding a brand-new one
 
 import { Keypair } from "@stellar/stellar-sdk";
 import { FianzaAgent } from "../dist/index.js";
 
-const API = process.env.TRUSTLINE_API ?? "https://trustline-rpxt.onrender.com";
+const API = process.env.TRUSTLINE_API ?? "https://fianza-3ecj.onrender.com";
 const FRIENDBOT = "https://friendbot.stellar.org";
 
 function log(step, msg) {

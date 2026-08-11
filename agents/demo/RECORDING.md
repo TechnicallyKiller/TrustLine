@@ -97,7 +97,7 @@ node -e "
 import('@trustline-agents/agent-sdk').then(async ({TrustLineAgent}) => {
   const dotenv = await import('dotenv');
   dotenv.config({ path: '../.env' });
-  const tl = new TrustLineAgent(process.env.DEMO_AGENT_SECRET, { apiBaseUrl: process.env.TRUSTLINE_API || 'https://trustline-rpxt.onrender.com' });
+  const tl = new TrustLineAgent(process.env.DEMO_AGENT_SECRET, { apiBaseUrl: process.env.TRUSTLINE_API || 'https://fianza-3ecj.onrender.com' });
   console.log('available credit:', await tl.availableCreditUsdc());
   console.log('wallet balance:', await tl.usdcBalanceUsdc());
 });

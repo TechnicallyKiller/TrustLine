@@ -27,7 +27,7 @@ import {
 } from "@stellar/stellar-sdk";
 import { TrustLineAgent } from "@trustline-agents/agent-sdk";
 
-const TRUSTLINE_API = process.env.TRUSTLINE_API || "https://trustline-rpxt.onrender.com";
+const TRUSTLINE_API = process.env.TRUSTLINE_API || "https://fianza-3ecj.onrender.com";
 const USDC = new Asset("USDC", "GBBD47IF6LWK7P7MDEVSCWR7DPUWV3NY3DTQEVFL4NAT4AQH3ZLLFLA5");
 const horizon = new Horizon.Server("https://horizon-testnet.stellar.org");
 
