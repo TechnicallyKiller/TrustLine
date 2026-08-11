@@ -15,7 +15,7 @@ export const revalidate = 0;
 const API_BASE =
   process.env.NEXT_PUBLIC_API_BASE_URL ?? "https://trustline-rpxt.onrender.com";
 const AGENT_SERVER =
-  process.env.NEXT_PUBLIC_AGENT_SERVER ?? "https://trustline-1.onrender.com";
+  process.env.NEXT_PUBLIC_AGENT_SERVER ?? "https://fianza-1.onrender.com";
 const DATA_SELLER =
   process.env.NEXT_PUBLIC_DATA_SELLER ?? "https://trustline-data-seller.onrender.com";
 const SOROBAN_RPC = "https://soroban-testnet.stellar.org";
