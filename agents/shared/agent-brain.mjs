@@ -9,7 +9,7 @@
 // implement. Point it at any of them with env vars — no code change:
 //   LLM_BASE_URL   (default https://api.groq.com/openai/v1)
 //   LLM_API_KEY    (default falls back to GROQ_API_KEY)
-//   LLM_MODEL      (default llama-3.3-70b-versatile)
+//   LLM_MODEL      (default openai/gpt-oss-120b)
 // Grok example: LLM_BASE_URL=https://api.x.ai/v1 LLM_API_KEY=xai-... LLM_MODEL=grok-2-latest
 //
 // The demo defaults to FREE Groq so there's zero billing risk on stage.
@@ -33,13 +33,13 @@ const PROVIDERS = [
     name: "custom",
     baseUrl: process.env.LLM_BASE_URL || "https://api.groq.com/openai/v1",
     apiKey: process.env.LLM_API_KEY,
-    model: process.env.LLM_MODEL || "llama-3.3-70b-versatile",
+    model: process.env.LLM_MODEL || "openai/gpt-oss-120b",
   },
   process.env.GROQ_API_KEY && {
     name: "groq",
     baseUrl: "https://api.groq.com/openai/v1",
     apiKey: process.env.GROQ_API_KEY,
-    model: process.env.GROQ_MODEL || "llama-3.3-70b-versatile",
+    model: process.env.GROQ_MODEL || "openai/gpt-oss-120b",
   },
   // Groq's per-model daily cap means the big model can be exhausted while the
   // smaller, cheaper model still has quota (and it burns far fewer tokens/day).
@@ -48,7 +48,7 @@ const PROVIDERS = [
     name: "groq-small",
     baseUrl: "https://api.groq.com/openai/v1",
     apiKey: process.env.GROQ_API_KEY,
-    model: process.env.GROQ_SMALL_MODEL || "llama-3.1-8b-instant",
+    model: process.env.GROQ_SMALL_MODEL || "openai/gpt-oss-20b",
   },
   process.env.GEMINI_API_KEY && {
     name: "gemini",
