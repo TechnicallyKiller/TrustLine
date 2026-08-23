@@ -21,7 +21,7 @@ npm install @fianza/agent-sdk
 import { FianzaAgent } from "@fianza/agent-sdk";
 
 const tl = new FianzaAgent(secret, {
-  apiBaseUrl: "https://fianza-3ecj.onrender.com", // the underwriting engine
+  apiBaseUrl: "https://fianza-5m68.onrender.com", // the underwriting engine
   rpcUrl: "https://soroban-testnet.stellar.org", // default: testnet
   networkPassphrase: "Test SDF Network ; September 2015", // default: testnet
   contracts: {           // optional — omit to auto-resolve from /config

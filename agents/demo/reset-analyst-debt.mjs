@@ -25,7 +25,7 @@ const { TrustLineAgent } = await import("@trustline-agents/agent-sdk");
 
 const horizon = new Horizon.Server("https://horizon-testnet.stellar.org");
 const USDC = new Asset("USDC", "GBBD47IF6LWK7P7MDEVSCWR7DPUWV3NY3DTQEVFL4NAT4AQH3ZLLFLA5");
-const API = process.env.TRUSTLINE_API || "https://fianza-3ecj.onrender.com";
+const API = process.env.TRUSTLINE_API || "https://fianza-5m68.onrender.com";
 const FLOAT = 0.05;
 const TOPUP = 0.6; // enough to cover principal+interest for the repay
 

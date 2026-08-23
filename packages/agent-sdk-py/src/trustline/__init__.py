@@ -5,7 +5,7 @@ TrustLine (Stellar), settled in USDC.
 
     from trustline import TrustLineAgent
 
-    tl = TrustLineAgent(secret, api_base_url="https://fianza-3ecj.onrender.com")
+    tl = TrustLineAgent(secret, api_base_url="https://fianza-5m68.onrender.com")
     tl.register()
     tl.underwrite()
     terms = tl.credit_line()

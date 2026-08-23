@@ -57,7 +57,7 @@ Then type e.g. *"Give me a research note on XLM."* and watch the agent work.
 
 - `agents/.env` → `GROQ_API_KEY` (free at console.groq.com), `OZ_API_KEY`
   (x402 facilitator), `ANALYST_WALLET_SECRET`, `TRUSTLINE_API`
-  (**`https://fianza-3ecj.onrender.com`** — the LIVE backend;
+  (**`https://fianza-5m68.onrender.com`** — the LIVE backend;
   `trustline.onrender.com` is suspended).
 - `agents/.demo-holding-wallet.local` → the holding/customer wallet keys.
 

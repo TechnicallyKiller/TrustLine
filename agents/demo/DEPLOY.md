@@ -44,8 +44,8 @@ npm --prefix packages/agent-sdk install && npm --prefix packages/agent-sdk run b
   - `ANALYST_WALLET_SECRET` = *(the demo agent's secret)*
   - `DEMO_HOLDING_SECRET` = *(the customer/holding wallet secret)*
   - `DEMO_HOLDING_PUBLIC` = `GCYTUI46TG2CGOGRC73VBD56KIIQHE46EKZ57SUQGZXHRE6MEXWXMMUI`
-  - `TRUSTLINE_API` = `https://fianza-3ecj.onrender.com`  *(the LIVE backend)*
-  - `DEMO_RESEARCH_URL` = `https://trustline-data-seller-cfww.onrender.com/research`
+  - `TRUSTLINE_API` = `https://fianza-5m68.onrender.com`  *(the LIVE backend)*
+  - `DEMO_RESEARCH_URL` = `https://fianza-2.onrender.com/research`
     *(or your branded subdomain from step 2)*
   - `DEMO_JOB_PAYOUT_USDC` = `0.5`
   - `AGENT_CORS_ORIGIN` = `https://<your-frontend-domain>`  *(optional; `*` if unset)*
@@ -67,7 +67,7 @@ In hPanel → **DNS / Nameservers** for `0xtrustline.online`, add CNAMEs:
 | Type | Name | Points to |
 |---|---|---|
 | CNAME | `agent` | `trustline-agent.onrender.com` |
-| CNAME | `data` | `trustline-data-seller-cfww.onrender.com` |
+| CNAME | `data` | `fianza-2.onrender.com` |
 
 Then in each Render service → **Settings → Custom Domains**, add
 `agent.0xtrustline.online` / `data.0xtrustline.online` so Render issues TLS certs.
@@ -94,7 +94,7 @@ Redeploy the frontend. Open `/agent-demo` — it now talks to the hosted agent.
 ## Verify after deploy
 
 ```bash
-curl https://trustline-data-seller-cfww.onrender.com/health      # {ok:true,...}
+curl https://fianza-2.onrender.com/health      # {ok:true,...}
 curl https://trustline-agent.onrender.com/info              # {agent,llm,...}
 ```
 

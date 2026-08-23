@@ -38,7 +38,7 @@ async function main() {
 
   console.log("Re-underwriting...");
   const tl = new TrustLineAgent(process.env.DEMO_AGENT_SECRET, {
-    apiBaseUrl: process.env.TRUSTLINE_API || "https://fianza-3ecj.onrender.com",
+    apiBaseUrl: process.env.TRUSTLINE_API || "https://fianza-5m68.onrender.com",
   });
   const result = await tl.underwrite({ skipProof: true });
   console.log(

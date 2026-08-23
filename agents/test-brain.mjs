@@ -39,7 +39,7 @@ for (const m of ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"]) {
 }
 
 console.log("\n=== GEMINI ===");
-for (const m of ["gemini-2.0-flash", "gemini-1.5-flash"]) {
+for (const m of ["gemini-3.6-flash"]) {
   if (await tryGemini(m)) break;
   console.log("---");
 }

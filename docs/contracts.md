@@ -5,7 +5,7 @@
 **Horizon:** `https://horizon-testnet.stellar.org`
 
 Always cross-check against the live `GET /config` on the backend
-(`https://fianza-3ecj.onrender.com/config`) before sending a transaction — it's
+(`https://fianza-5m68.onrender.com/config`) before sending a transaction — it's
 the source of truth the frontend and SDK actually resolve against.
 
 ## Current deployment

@@ -31,7 +31,7 @@ asset = sys.argv[1] if len(sys.argv) > 1 else "XLM"
 
 tl = TrustLineAgent(
     env["DEMO_AGENT_SECRET"],
-    api_base_url=env.get("TRUSTLINE_API") or "https://fianza-3ecj.onrender.com",
+    api_base_url=env.get("TRUSTLINE_API") or "https://fianza-5m68.onrender.com",
 )
 
 print(f'[credit-agent] requesting research on "{asset}"...')

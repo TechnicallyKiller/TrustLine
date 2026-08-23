@@ -40,7 +40,7 @@ import {
   BASE_FEE,
 } from "@stellar/stellar-sdk";
 
-const TRUSTLINE_API = process.env.TRUSTLINE_API || "https://fianza-3ecj.onrender.com";
+const TRUSTLINE_API = process.env.TRUSTLINE_API || "https://fianza-5m68.onrender.com";
 // The paid premium-data endpoint the agent buys from (an x402 capability).
 // Defaults to the analyst research server; override for the demo host.
 const RESEARCH_URL = process.env.DEMO_RESEARCH_URL || "http://localhost:3022/research";

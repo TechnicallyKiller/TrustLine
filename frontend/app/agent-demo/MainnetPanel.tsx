@@ -11,7 +11,7 @@ import { useCallback, useState } from "react";
 import { AlertTriangle, ExternalLink, Loader2, RefreshCw, Wallet } from "lucide-react";
 
 const BACKEND =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "https://fianza-3ecj.onrender.com";
+  process.env.NEXT_PUBLIC_API_BASE_URL || "https://fianza-5m68.onrender.com";
 const MAINNET_EXPLORER = (h: string) => `https://stellar.expert/explorer/public/tx/${h}`;
 const CONTRACT_EXPLORER = (id: string) => `https://stellar.expert/explorer/public/contract/${id}`;
 

@@ -32,7 +32,7 @@ const { TrustLineAgent } = await import("../../packages/agent-sdk/dist/index.js"
 
 const horizon = new Horizon.Server("https://horizon-testnet.stellar.org");
 const USDC = new Asset("USDC", "GBBD47IF6LWK7P7MDEVSCWR7DPUWV3NY3DTQEVFL4NAT4AQH3ZLLFLA5");
-const API = process.env.TRUSTLINE_API || "https://fianza-3ecj.onrender.com";
+const API = process.env.TRUSTLINE_API || "https://fianza-5m68.onrender.com";
 const EXPLORER = (h) => `https://stellar.expert/explorer/testnet/tx/${h}`;
 const BORROW_USDC = Number(process.env.DEADBEAT_BORROW_USDC || 0.1);
 

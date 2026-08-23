@@ -54,7 +54,7 @@ const PROVIDERS = [
     name: "gemini",
     baseUrl: "https://generativelanguage.googleapis.com/v1beta/openai",
     apiKey: process.env.GEMINI_API_KEY,
-    model: process.env.GEMINI_MODEL || "gemini-2.0-flash",
+    model: process.env.GEMINI_MODEL || "gemini-3.6-flash",
   },
 ].filter(Boolean);
 

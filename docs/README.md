@@ -2,7 +2,7 @@
 
 _Formerly "TrustLine" — renamed to Fianza to avoid confusion with an
 unrelated, already-funded SCF project of the same name. The backend API
-host (`fianza-3ecj.onrender.com`) and GitHub repo path are unchanged for
+host (`fianza-5m68.onrender.com`) and GitHub repo path are unchanged for
 now — see the note next to each below._
 
 **Fianza is a revenue-underwritten, uncollateralized USDC credit protocol
@@ -50,7 +50,7 @@ autonomously. No collateral, no human in the loop, no wallet-age heuristics.
 |---|---|
 | Live app | [fianza.space](https://fianza.space) |
 | Live underwriter (paste any address) | [/underwrite](https://fianza.space/underwrite) |
-| Backend API | `https://fianza-3ecj.onrender.com` (unchanged) |
+| Backend API | `https://fianza-5m68.onrender.com` (unchanged) |
 | GitHub | [TechnicallyKiller/Fianza](https://github.com/TechnicallyKiller/Fianza) |
 | Agent SDK | [`packages/agent-sdk-fianza`](../packages/agent-sdk-fianza) (new); [`packages/agent-sdk`](../packages/agent-sdk) (old, still published & working) |
 

@@ -13,7 +13,7 @@ import { TrustLineAgent } from "../../packages/agent-sdk/dist/index.js";
 // deposit goes to the vault contract's address, not the agent's own wallet,
 // so it's invisible to the revenue/independence graph entirely.
 const lender = new TrustLineAgent(process.env.CUSTOMER1_SECRET, {
-  apiBaseUrl: process.env.TRUSTLINE_API || "https://fianza-3ecj.onrender.com",
+  apiBaseUrl: process.env.TRUSTLINE_API || "https://fianza-5m68.onrender.com",
 });
 const amount = Number(process.argv[2] || "2");
 
